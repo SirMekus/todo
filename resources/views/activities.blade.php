@@ -20,13 +20,13 @@
 
             @if(request()->user('admin') and request()->user('admin')->isSuperAdmin())
             <div class="d-flex justify-content-center">
-                <a href="#" class="text-decoration-none bg-dark text-light btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a href="#" class="text-decoration-none bg-dark text-light btn" data-bs-toggle="modal" data-bs-target="#calendarModal">
                     <span class="text-center fs-1 fw-bolder">{{carbon($date)->format('jS')}}</span><br />
                     <span class="fw-bold">{{carbon($date)->format('F, Y')}}</span>
                 </a>
             </div>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-fullscreen">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -119,6 +119,10 @@
                     </a>
             </div>
             @endif
+
+            <div class="fixed-bottom">
+                <a class="float-end" href="#" data-bs-toggle="modal" data-bs-target="#calendarModal"><i class="fa-3x fas fa-calendar-alt bg-white text-dark"></i></a>
+            </div>
             @endif
 
         </div>
