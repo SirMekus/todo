@@ -27,10 +27,7 @@
               <input type="password" class="form-control form-control-lg" placeholder="Password" name="password">
             </div>
             <div class="col-12 mt-2">
-
               <input type="submit" class="btn home-color text-white form-control" value="Sign In" />
-
-
             </div>
           </form>
 

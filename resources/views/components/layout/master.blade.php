@@ -13,17 +13,18 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 sticky-top">
                     <a class="navbar-brand d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none" href="#">
-                        <img src="{{ asset('images/footer/logo.png')}}" alt="" srcset="" width="64px" height="64px">
+                        <img src="{{ asset('storage/for_site/heart.png') }}" alt="" srcset="" width="64px" height="64px">
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold text-light align-middle px-0">
+                            <a href="{{route('activities')}}" class="nav-link font-weight-bold text-light align-middle px-0">
                                 <i class="fs-4 fas fa-house-user"></i> <span class="ms-1 d-none d-sm-inline">Activities</span>
                             </a>
                         </li>
+
+                        @auth('admin')
                         <li class="nav-item">
-                            <a class="nav-link font-weight-bold text-light align-middle px-0" data-bs-toggle="collapse"
-                            href="#users" href="#">
+                            <a class="nav-link font-weight-bold text-light align-middle px-0" href="{{route('users')}}">
                                 <i class="fs-4 fas fa-building-user"></i><span class="ms-1 d-none d-sm-inline">Users</span>
                             </a>
                         </li>
@@ -33,6 +34,7 @@
                                 <i class="fs-4 fas fa-newspaper"></i><span class="ms-1 d-none d-sm-inline">Admins</span>
                             </a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link font-weight-bold text-light align-middle px-0 pre-run" data-caption="Are You Sure You Want To logout?"
                                 data-classname="run-get-request" data-bc="admin_logout"
@@ -40,6 +42,17 @@
                                 <i class="fas fa-sign-out-alt"></i><span class="ms-1 d-none d-sm-inline">Log Out</span></a>
                             </a>
                         </li>
+                        @endauth
+
+                        @auth('web')
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold text-light align-middle px-0 pre-run" data-caption="Are You Sure You Want To logout?"
+                                data-classname="logout-form" data-bc="admin_logout"
+                                href="{{route('logout')}}">
+                                <i class="fas fa-sign-out-alt"></i><span class="ms-1 d-none d-sm-inline">Log Out</span></a>
+                            </a>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
             </div>

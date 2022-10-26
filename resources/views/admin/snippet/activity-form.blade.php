@@ -17,16 +17,27 @@
     data-preview="preview-upload" accept="image/*" name='image' />
     @endif
 
-        <input type="hidden" value="{{request()->id}}" name='id'/>
+        @if(request()->filled('user_id') or !empty(activityToDisplay($activity)->user_id))
+            <input type="hidden" value="{{request()->user_id ?? activityToDisplay($activity)->user_id}}" name="user_id" />
+        @endif
+
+        @if(request()->filled('id'))
+            <input type="hidden" value="{{request()->id}}" name="id" />
+        @endif
 
         <div class="form-group mt-3">
             <label>Title</label>
-            <input type='text' value="{{optional($activity)->title}}" class="form-control-lg form-control" name="title"/>
+            <input type='text' value="{{optional(activityToDisplay($activity))->title}}" class="form-control-lg form-control" name="title"/>
+        </div>
+
+        <div class="form-group mt-3">
+            <label>Date</label>
+            <input type='date' value="{{optional($activity)->due_date ?? request()->date}}" class="form-control-lg form-control" name="date"/>
         </div>
 
         <div class="form-group mt-3">
             <label>Description</label>
-            <textarea class="form-control-lg form-control" style="border-radius:10px;" col="2" rows="2" name="description">{{optional($activity)->description}}</textarea>
+            <textarea class="form-control-lg form-control" style="border-radius:10px;" col="2" rows="2" name="description">{{optional(activityToDisplay($activity))->description}}</textarea>
         </div>
 
 

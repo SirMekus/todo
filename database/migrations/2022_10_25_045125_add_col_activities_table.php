@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('activities', function (Blueprint $table) {
-            $table->date('due_date')->nullable()->after('description');
+            $table->date('due_date')->nullable()->after('image');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('activities', function (Blueprint $table) {
-            //
+            $table->dropColumn(['due_date']);
         });
     }
 };

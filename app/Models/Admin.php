@@ -50,4 +50,9 @@ class Admin extends Authenticatable
     {
         return $this->attributes['active'] >= 1 ? 'active' : 'deactivated';
     }
+    
+    public function isSuperAdmin()
+    {
+        return $this->attributes['role'] == 'super_admin';
+    }
 }

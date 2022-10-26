@@ -1,4 +1,4 @@
-import { registerEventListeners, lazyLoadImages } from "mmuo"
+import { registerEventListeners, lazyLoadImages, on, showSpinner, removeSpinner, showCanvass } from "mmuo"
 import * as bootstrap from '~bootstrap';
 import axios from 'axios';
 import lodash from 'lodash';
@@ -20,6 +20,36 @@ window.addEventListener("DOMContentLoaded", function() {
     document.addEventListener('activity_trigger', (response) => {
         location.reload()
     });
+
+    on('.logout-form', 'click', function(event){
+        event.preventDefault();
+        
+        if(document.querySelector(".close-alert")){
+            document.querySelector(".close-alert").click(); 
+        }
+
+        showSpinner()
+
+        var clickedLink = event.currentTarget;
+    
+        var href = clickedLink.getAttribute("href");
+
+        axios
+        .request({
+            url: href,
+            method: 'POST',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+          })
+        .then((response) => {
+            location.href=response.data.url
+        }).catch((error) => {
+            showCanvass("<div class='text-danger'>"+error.response.data.message +"</div>")
+        }).then(() => {
+            removeSpinner()
+        });
+    })
     
 }, false);
 

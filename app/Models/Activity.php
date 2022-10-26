@@ -11,10 +11,18 @@ class Activity extends Model
     
     protected $guarded = [];
 
-    protected $with = ['edits'];
-
     public function edits()
     {
-        return $this->hasOne(Edit::class);
+        return $this->hasMany(Edit::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeWhereDateBetween($query,$fieldName,$fromDate,$todate)
+    {
+        return $query->whereDate($fieldName,'>=',$fromDate)->whereDate($fieldName,'<=',$todate);
     }
 }

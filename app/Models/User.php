@@ -8,11 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,8 +39,6 @@ class User extends Authenticatable
         'two_factor_recovery_codes',
         //'created_at',
         'updated_at',
-        //'deleted_at',
-        'auth_token',
     ];
 
     /**
@@ -58,4 +55,14 @@ class User extends Authenticatable
 	{
 		$this->attributes['password'] = Hash::make($password);
 	}
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function edits()
+    {
+        return $this->hasMany(Edit::class);
+    }
 }
